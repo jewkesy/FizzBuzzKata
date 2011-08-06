@@ -57,20 +57,29 @@ namespace FizzBuzzKata.Tests
         [Test]
         public void TestThatNegativeNumberPassedThrowsException()
         {
-            var ex = Assert.Throws<ArgumentNullException>(() => _fizzBuzzKata.PlayGame(-1));
-            Assert.That(ex.ParamName, Is.EqualTo("bar"));
+            ArgumentException exception = Assert.Throws<ArgumentException>(() => _fizzBuzzKata.PlayGame(-5));
+            Assert.AreEqual("noRecords must be greater than zero", exception.Message);
         }
 
         [Test]
         public void TestThatZeroNumberPassedThrowsException()
         {
-            
+            ArgumentException exception = Assert.Throws<ArgumentException>(() => _fizzBuzzKata.PlayGame(-5));
+            Assert.AreEqual("noRecords must be greater than zero", exception.Message);
         }
 
         [Test]
         public void TestThatPositiveNumberPassedReturnsAPopulatedList()
         {
-            
+            Assert.That(_sut.Count, Is.GreaterThan(0));
+        }
+
+        [Test]
+        public void TestThatWeIncrementByOne()
+        {
+            Assert.That(_sut[0], Is.EqualTo("1"));
+            Assert.That(_sut[1], Is.EqualTo("2"));
+            Assert.That(_sut[97], Is.EqualTo("98"));
         }
     }
 }
